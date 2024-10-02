@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OABSystem.Areas.Identity.Data
+
+@inject SignInManager<OABSystemUser> SignInManager
+@inject UserManager<OABSystemUser> UserManager
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Online Appointment Booking.@if (!SignInManager.IsSignedIn(User))
+        {
+            <span>Please login to continue.</span>
+        }</h1>
+</div>

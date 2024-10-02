@@ -1,0 +1,54 @@
+﻿@page
+@model OABSystem.Pages.Appointment.CreateModel
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<h1>Create</h1>
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Healthcare Professional</label>
+                <div><select asp-for="Appointment.HealthcareProfessional.Id" asp-items="@Model.HealthProfessionals" class="form-control"></select></div>
+                 <span asp-validation-for="Appointment.HealthcareProfessional" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-label-for="Appointment.AppointmentDateTime" class="control-label">Appointment DateTime</label>
+                <input asp-for="Appointment.AppointmentDateTime" class="form-control" />
+                <span asp-validation-for="Appointment.AppointmentDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-label-for="Appointment.PatientName" class="control-label">Patient Name</label>
+                <input asp-for="Appointment.PatientName" class="form-control" />
+                <span asp-validation-for="Appointment.PatientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-label-for="Appointment.PatientContact" class="control-label">Patient Contact</label>
+                <input asp-for="Appointment.PatientContact" class="form-control" />
+                <span asp-validation-for="Appointment.PatientContact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-label-for="Appointment.ReasonForAppointment" class="control-label">Reason For Appointment</label>
+                <input asp-for="Appointment.ReasonForAppointment" class="form-control" />
+                <span asp-validation-for="Appointment.ReasonForAppointment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+@* 
+<div>
+    <a asp-page="Index">Back to List</a>
+</div> *@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

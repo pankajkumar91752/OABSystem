@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "AppointmentMenu";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using OABSystem.Areas.Identity.Data
+
+@inject SignInManager<OABSystemUser> SignInManager
+@inject UserManager<OABSystemUser> UserManager
+
+<ul class="nav flex-column">
+  
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+           <a class="nav-link text-dark" asp-area="" asp-page="/Appointment/create">Book Appointment</a>
+
+        </li>
+        @if (await UserManager.IsInRoleAsync(await UserManager.GetUserAsync(User), "Admin"))
+        {
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-page="/HealthCareProfessional/index">Mangae HealthCareProfessional</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-page="/Appointment/index">Mangae Appointment</a>
+            </li>
+
+        }
+    }
+   
+          
+
+        </ul>
+  </ul>
+
+
