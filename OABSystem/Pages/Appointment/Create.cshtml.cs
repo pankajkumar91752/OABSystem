@@ -14,6 +14,7 @@ using OABSystem.Models;
 namespace OABSystem.Pages.Appointment
 {
     [Authorize]
+    [ValidateAntiForgeryToken]
     public class CreateModel : PageModel
     {
         private readonly OABSystem.Data.OABSystemContext _context;
@@ -69,8 +70,8 @@ namespace OABSystem.Pages.Appointment
                // Appointment = new Models.Appointment();
                 await _context.SaveChangesAsync();
 
-                //return RedirectToPage("Confirmation", new  { id= Appointment.AppointmentId});
-                return RedirectToPage("Create", new { id = Appointment.AppointmentId });
+                return RedirectToPage("Confirmation", new  { id= Appointment.AppointmentId});
+                //return RedirectToPage("Create", new { id = Appointment.AppointmentId });
             
            
         }

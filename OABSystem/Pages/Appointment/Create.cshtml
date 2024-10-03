@@ -14,7 +14,12 @@
     {
         <div class="col-md-4">
             <form method="post">
+              
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+                <input asp-for="Appointment.UserName" class="form-control" hidden value="@User.Identity?.Name" />
+           
             <div class="form-group">
                 <label class="control-label">Healthcare Professional</label>
                 <div><select asp-for="Appointment.HealthcareProfessional.Id" asp-items="@Model.HealthProfessionals" class="form-control"></select></div>
@@ -40,6 +45,7 @@
                 <input asp-for="Appointment.ReasonForAppointment" class="form-control" />
                 <span asp-validation-for="Appointment.ReasonForAppointment" class="text-danger"></span>
             </div>
+                @Html.AntiForgeryToken()
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

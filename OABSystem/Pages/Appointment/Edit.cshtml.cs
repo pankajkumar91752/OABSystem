@@ -8,11 +8,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OABSystem.Data;
+using OABSystem.Filters;
 using OABSystem.Models;
 
 namespace OABSystem.Pages.Appointment
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
+    [TypeFilter(typeof(UserAppoinmentAuthorizationFilter))]
+
+    [ValidateAntiForgeryToken]
     public class EditModel : PageModel
     {
         private readonly OABSystem.Data.OABSystemContext _context;
@@ -24,7 +28,6 @@ namespace OABSystem.Pages.Appointment
 
         [BindProperty]
         public OABSystem.Models.Appointment Appointment { get; set; } = default!;
-
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null || _context.Appointment == null)
@@ -45,13 +48,18 @@ namespace OABSystem.Pages.Appointment
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("Appointment.HealthcareProfessional.Name");
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Appointment).State = EntityState.Modified;
+           Appointment.HealthcareProfessional = 
+             await _context.HealthcareProfessional.FirstOrDefaultAsync(m => m.Id == Appointment.HealthcareProfessional.Id);
 
+            _context.Entry(Appointment).Reference(p => p.HealthcareProfessional).IsModified = false;
+            _context.Attach(Appointment).State = EntityState.Modified;
             try
             {
                 await _context.SaveChangesAsync();

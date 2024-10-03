@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using OABSystem.Data;
+using OABSystem.Filters;
 using OABSystem.Models;
 
 namespace OABSystem.Pages.Appointment
 {
-    [Authorize(Roles = "Admin")]
+
+    [Authorize]
+    [TypeFilter(typeof(UserAppoinmentAuthorizationFilter))]
     public class DeleteModel : PageModel
     {
         private readonly OABSystem.Data.OABSystemContext _context;

@@ -22,6 +22,9 @@ namespace OABSystem.Models
         [StringLength(50, ErrorMessage = "Patient name cannot exceed 50 characters")]
         public string PatientName { get; set; }
 
+       // [StringLength(50, ErrorMessage = "Patient name cannot exceed 50 characters")]
+        public string? UserName { get; set; }
+
         [Required(ErrorMessage = "Patient contact is required")]
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Patient contact must be a 10-digit number")]
         public string PatientContact { get; set; }
