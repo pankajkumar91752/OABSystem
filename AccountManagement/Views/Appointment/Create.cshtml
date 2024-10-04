@@ -1,0 +1,64 @@
+﻿@model AccountManagement.Models.Appointment
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<h2>Book Appointment</h2>
+
+<li>
+    <a asp-action="Index"   class="elements">
+        <span>List Appointments</span>
+    </a>
+</li>
+
+<form id="appointmentForm" asp-action="Create" method="post">
+    <div>
+        <label>Healthcare Professional Name</label>
+        <input asp-for="HealthcareProfessional.Name" required />
+        <span asp-validation-for="HealthcareProfessional.Name" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Appointment Date and Time</label>
+        <input asp-for="AppointmentDateTime" type="datetime-local" required />
+        <span asp-validation-for="AppointmentDateTime" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Patient Name</label>
+        <input asp-for="PatientName" required />
+        <span asp-validation-for="PatientName" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Patient Contact</label>
+        <input asp-for="PatientContact" required />
+        <span>(10 digits only, e.g., 1234567890)</span>
+    </div>
+    <div>
+        <label>Reason for Appointment</label>
+        <input asp-for="ReasonForAppointment" required />
+        <span asp-validation-for="ReasonForAppointment" class="text-danger"></span>
+    </div>
+    <button type="submit">Book Appointment</button>
+</form>
+
+<script>
+    $(document).ready(function () {
+      
+        $('#appointmentForm').submit(function (e) {
+           
+            const appointmentDateTime = new Date($('#AppointmentDateTime').val());
+            const currentDateTime = new Date();
+            if (appointmentDateTime <= currentDateTime) {
+                e.preventDefault();
+                alert("Appointment time must be in the future.");
+            }
+            // Basic regex for validating phone number
+            const phoneRegex = /^\d{10}$/; // Example for a 10-digit number
+            const patientContact = $('#PatientContact').val();
+            if (!phoneRegex.test(patientContact)) {
+                e.preventDefault();
+                alert("Please enter a valid phone number (10 digits).");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,40 @@
+﻿@using AccountManagement.Models
+@{
+    ViewData["Title"] = "Appointment Page";
+}
+@model IEnumerable<Appointment> 
+<h2>@ViewData["Title"] </h2>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+
+<li>
+    <a href="@Url.Action("Create", "Appointment")" class="elements">
+        <span>Book Appointments</span>
+    </a>
+</li>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Healthcare Professional</th>
+            <th>Appointment Date and Time</th>
+            <th>Patient Name</th>
+            <th>Contact Information</th>
+            <th>Reason for Appointment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.HealthcareProfessional?.Name</td>
+                <td>@appointment.AppointmentDateTime</td>
+                <td>@appointment.PatientName</td>
+                <td>@appointment.PatientContact</td>
+                <td>@appointment.ReasonForAppointment</td>
+            </tr>
+        }
+    </tbody>
+</table>
