@@ -20,7 +20,10 @@ public class OABSystemContext : IdentityDbContext<OABSystemUser>
 
         base.OnModelCreating(builder);
         builder.Entity<HealthcareProfessional>().HasAlternateKey(e => e.Name);
-
+        builder.Entity<HealthcareProfessional>().HasData(
+            new { Name = "PAnkaj", Id = 10 },
+            new { Name = "Kumar", Id = 11 }
+            );
         // Customize the ASP.NET Identity model and override the defaults if needed.
         // For example, you can rename the ASP.NET Identity table names and more.
         // Add your customizations after calling base.OnModelCreating(builder);

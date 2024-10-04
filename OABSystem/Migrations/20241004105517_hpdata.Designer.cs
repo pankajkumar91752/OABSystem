@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OABSystem.Data;
 
@@ -11,9 +12,10 @@ using OABSystem.Data;
 namespace OABSystem.Migrations
 {
     [DbContext(typeof(OABSystemContext))]
-    partial class OABSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20241004105517_hpdata")]
+    partial class hpdata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
